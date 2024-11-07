@@ -1,0 +1,32 @@
+//package SapJava;
+//exp4a
+public class MethodOverload {
+    // Method to calculate sum of two integers
+    void sum(int a, int b) {
+        System.out.println("sum is " + (a + b));
+    }
+    
+    // Method to calculate sum of three integers
+    void sum(int a, int b, int c) {
+        System.out.println("sum is " + (a + b + c));
+    }
+    
+    // Method to calculate sum of two doubles
+    void sum(double a, double b) {
+        System.out.println("sum is " + (a + b));
+    }
+    
+    public static void main(String[] args) {
+        MethodOverload cal = new MethodOverload();
+        System.out.println("Method Overloading");
+
+        // Calls the sum method with two integers
+        cal.sum(8, 5);  // sum(int a, int b) is called
+
+        // Calls the sum method with three integers
+        cal.sum(5, 5, 5);  // sum(int a, int b, int c) is called
+
+        // Calls the sum method with two doubles
+        cal.sum(4.6, 3.8);  // sum(double a, double b) iscalled
+        }
+}

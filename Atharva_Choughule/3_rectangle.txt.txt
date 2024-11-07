@@ -1,0 +1,67 @@
+import java.util.Scanner;
+//exp3
+class Rect {
+    double w, l, a;
+    String colour;
+    
+    // Method to set the length of the rectangle
+    void get_length(Scanner d) {
+        System.out.println("Enter the length:");
+        l = d.nextDouble();
+    }
+    
+    // Method to set the width of the rectangle
+    void get_width(Scanner d) {
+        System.out.println("Enter the width:");
+        w = d.nextDouble();
+    }
+    
+    // Method to set the color of the rectangle
+    void get_colour(Scanner d) {
+        System.out.println("Enter the color:");
+        colour = d.next();
+    }
+    
+    // Method to calculate the area of the rectangle
+    double find_area() {
+        a = w * l;
+        return a;
+    }
+    
+    // Method to get the color of the rectangle
+    String show_colour() {
+        return colour;
+    }
+}
+
+public class Rectangle {
+    public static void main(String[] args) {
+        Scanner d = new Scanner(System.in); // Single scanner for both rectangles
+        
+        Rect R1 = new Rect();
+        Rect R2 = new Rect();
+        
+        System.out.println("First rectangle:");
+        R1.get_length(d);
+        R1.get_width(d);
+        R1.get_colour(d);
+        
+        System.out.println("Second rectangle:");
+        R2.get_length(d);
+        R2.get_width(d);
+        R2.get_colour(d);
+        
+        // Retrieve color and area for both rectangles
+        String c1 = R1.show_colour();
+        String c2 = R2.show_colour();
+        
+        // Compare area and color of both rectangles
+        if ((R1.find_area() == R2.find_area()) && (c1.equals(c2))) {
+            System.out.println("Matching rectangle");
+        } else {
+            System.out.println("Non-matching rectangles");
+        }
+        
+        d.close(); // Close thescanner
+}
+}

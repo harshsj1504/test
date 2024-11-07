@@ -1,0 +1,46 @@
+//exp8
+// Interface defining departments
+interface Department {
+    void ENTC();
+    void CE();
+    void AIDS();
+}
+
+// Class implementing the Department interface
+class DeptName implements Department {
+    
+    // Implementation for ENTC department subjects
+    public void ENTC() {
+        System.out.println("Subjects for ENTC are:");
+        System.out.println("1) Control Systems");
+        System.out.println("2) Fundamentals of Java Programming");
+        System.out.println("3) Microcontroller\n");
+    }
+    
+    // Implementation for CE department subjects
+    public void CE() {
+        System.out.println("Subjects for CE are:");
+        System.out.println("1) DBMS");
+        System.out.println("2) Data Structures");
+        System.out.println("3) Computer Networks\n");
+    }
+    
+    // Implementation for AIDS department subjects
+    public void AIDS() {
+        System.out.println("Subjects for AIDS are:");
+        System.out.println("1) Web Technology");
+        System.out.println("2) Statistics");
+        System.out.println("3) Blockchain\n");
+    }
+}
+
+public class InterfaceExample {
+    public static void main(String[] args) {
+        DeptName dept = new DeptName(); // Create an instance of DeptName
+
+        // Display subjects for each department
+        dept.ENTC();
+        dept.CE();
+        dept.AIDS();
+}
+}
