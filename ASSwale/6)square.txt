@@ -1,0 +1,50 @@
+#include <p18f4550.h>
+#include <stdlib.h>
+
+void timer_isr (void);
+extern void _startup (void);
+#pragma code _RESET_INTERRUPT_VECTOR = 0x1000
+void _reset (void)
+{
+    _asm goto _startup _endasm
+}
+
+#pragma code
+
+#pragma code _HIGH_INTERRUPT_VECTOR = 0x1008
+void high_ISR (void)
+{
+    _asm goto timer_isr _endasm
+}
+#pragma code
+
+#pragma code _LOW_INTERRUPT_VECTOR = 0x1018
+void low_ISR (void)
+{
+}
+
+#pragma code
+
+#pragma interrupt timer_isr
+void timer_isr(void)
+{
+    TMR0H = 0xFF;
+    TMR0L = 0X00;
+    PORTB = ~PORTB;
+    INTCONbits.TMR0IF = 0;
+}
+
+void main()
+{
+    ADCON1 = 0x0F;
+    TRISB = 0;
+    PORTB = 0xFF;
+    T0CON = 0x00;
+    TMR0H = 0xFF;
+    TMR0L = 0x00;
+    INTCONbits.TMR0IF = 0;
+    INTCONbits.TMR0IE = 1;
+    INTCONbits.TMR0ON = 1;
+    INTCONbits.GIE = 1;
+    while(1);
+}
