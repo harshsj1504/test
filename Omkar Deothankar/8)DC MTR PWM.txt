@@ -1,0 +1,55 @@
+
+#include <p18f4550.h>
+
+void myMsDelay(unsigned int time);
+
+extern void _startup(void); // See c018i.c
+#pragma code _RESET_INTERRUPT_VECTOR = 0x1000
+void _reset(void)
+{
+    _asm goto _startup _endasm
+}
+
+#pragma code
+
+#pragma interrupt _HIGH_INTERRUPT_VECTOR=0x1008
+void _HIGH_ISR(void)
+{
+}
+
+#pragma interrupt _LOW_INTERRUPT_VECTOR=0x1018
+void _LOW_ISR(void)
+{
+}
+#pragma code
+#pragma code
+
+void main()
+{
+    TRISCbits.TRISC2 = 0;
+    TRISCbits.TRISC6 = 0;
+    TRISCbits.TRISC7 = 0;
+    PR2 = 0x4A;
+    CCPR1L = 0x12;
+    CCP1CON = 0x3C;
+    PORTCbits.RC6 = 1;
+    PORTCbits.RC7 = 0;
+
+    while (1)
+    {
+        PR2 = 0x00;
+        myMsDelay(1000);
+        PR2 = 0x3F;
+        myMsDelay(1000);
+        PR2 = 0xBF;
+        myMsDelay(1000);
+        PR2 = 0xFF;
+        myMsDelay(1000);
+    }
+}
+void myMsDelay (unsigned int time)
+{
+    unsigned int i, j;
+    for (i = 0; i < time; i++)
+        for (j = 0; j < 710; j++);
+}

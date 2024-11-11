@@ -1,0 +1,41 @@
+
+#include <reg51.h>
+void delay();
+sbit SW = P0^1;
+
+void main()
+{
+    while(1) {
+        SW = 1;
+        if (SW == 1) {
+            P1 = 0x08;
+            delay();
+            P1 = 0x04;
+            delay();
+            P1 = 0x02;
+            delay();
+            P1 = 0x01;
+            delay();
+        }
+        else {
+            P1 = 0x01;
+            delay();
+            P1 = 0x02;
+            delay();
+            P1 = 0x04;
+            delay();
+            P1 = 0x08;
+            delay();
+        }
+    }
+}
+
+void delay() {
+    TMOD = 0x01;
+    TL0 = 0x00;
+    TH0 = 0xDC;
+    TR0 = 1;
+    while (TF0 == 0);
+    TR0 = 0;
+    TF0 = 0;
+}
